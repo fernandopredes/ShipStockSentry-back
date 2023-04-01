@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError,IntegrityError
 
 from db import db
 from models import DailyRecordModel
-from schemas import DailyRecordSchema
+from schemas import DailyRecordSchema, UpdateRecordSchema
 
 blp = Blueprint("Daily Records", __name__, description="Operations on Daily Records")
 
@@ -30,3 +30,30 @@ class DailyRecord(MethodView):
     def get(self, daily_record_id):
         daily_record = DailyRecordModel.query.get_or_404(daily_record_id)
         return daily_record
+
+    @blp.arguments(UpdateRecordSchema)
+    @blp.response(200, DailyRecordSchema)
+    def put(self, daily_record_data, daily_record_id):
+        daily_record = DailyRecordModel.query.get(daily_record_id)
+        if daily_record:
+            if daily_record_data.get('date') is not None:
+                daily_record.date = daily_record_data['date']
+            daily_record.diesel = daily_record_data['diesel']
+            daily_record.drill_water = daily_record_data['drill_water']
+            daily_record.fresh_water = daily_record_data['fresh_water']
+            daily_record.bentonite = daily_record_data['bentonite']
+            daily_record.barite = daily_record_data['barite']
+            daily_record.limestone = daily_record_data['limestone']
+        else:
+            daily_record = DailyRecordModel(id=daily_record_id, **daily_record_data)
+
+        db.session.add(daily_record)
+        db.session.commit()
+
+        return daily_record
+
+    def delete(self, daily_record_id):
+        daily_record = DailyRecordModel.query.get_or_404(daily_record_id)
+        db.session.delete(daily_record)
+        db.session.commit()
+        return {"message":"ROB deletado"}, 200
