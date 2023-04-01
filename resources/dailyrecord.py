@@ -2,6 +2,7 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError,IntegrityError
+from flask_jwt_extended import jwt_required
 
 from db import db
 from models import DailyRecordModel
@@ -11,6 +12,7 @@ blp = Blueprint("Daily Records", __name__, description="Operations on Daily Reco
 
 @blp.route('/daily_record')
 class DailyRecordList(MethodView):
+    @jwt_required()
     @blp.arguments(DailyRecordSchema)
     @blp.response(201, DailyRecordSchema)
     def post(self, daily_record_data):
@@ -27,10 +29,12 @@ class DailyRecordList(MethodView):
 @blp.route('/daily_record/<int:daily_record_id>')
 class DailyRecord(MethodView):
     @blp.response(200, DailyRecordSchema)
+    @jwt_required()
     def get(self, daily_record_id):
         daily_record = DailyRecordModel.query.get_or_404(daily_record_id)
         return daily_record
 
+    @jwt_required()
     @blp.arguments(UpdateRecordSchema)
     @blp.response(200, DailyRecordSchema)
     def put(self, daily_record_data, daily_record_id):
@@ -52,6 +56,7 @@ class DailyRecord(MethodView):
 
         return daily_record
 
+    @jwt_required()
     def delete(self, daily_record_id):
         daily_record = DailyRecordModel.query.get_or_404(daily_record_id)
         db.session.delete(daily_record)

@@ -56,25 +56,23 @@ class UserLogout(MethodView):
 
 @blp.route("/users")
 class Users(MethodView):
+    @jwt_required()
     @blp.response(200, UserSchema(many=True))
     def get(self):
         return UserModel.query.all()
 
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
+    @jwt_required()
     @blp.response(200, UserSchema)
     def get(self, user_id):
         user = UserModel.query.get_or_404(user_id)
         return user
 
-    def delete(self, user_id):
-        user = UserModel.query.get_or_404(user_id)
-        db.session.delete(user)
-        db.session.commit()
-        return {"message":"User deleted."},200
 
 @blp.route("/user/<int:user_id>/daily_records")
 class UserRecordsList(MethodView):
+    @jwt_required()
     @blp.response(200, DailyRecordSchema(many=True))
     def get(self, user_id):
         daily_records = DailyRecordModel.query.filter_by(user_id=user_id).all()
