@@ -18,3 +18,7 @@ class UserSchema(Schema):
     email = fields.Email(required=True)
     ship_name = fields.Str(required=True)
     daily_records = fields.List(fields.Nested(DailyRecordSchema()), dump_only=True)
+
+class UserLoginSchema(Schema):
+    email = fields.Email(required=True)
+    password = fields.Str(required=True, load_only=True)
