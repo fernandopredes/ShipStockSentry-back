@@ -1,12 +1,13 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import pbkdf2_sha256
+from blocklist import BLOCKLIST
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 
 
 from db import db
 from models import UserModel
-from schemas import UserSchema
+from schemas import UserSchema, UserLoginSchema
 
 blp = Blueprint("Users", __name__, description="Operations on Users")
 
@@ -30,3 +31,44 @@ class UserRegister(MethodView):
         db.session.commit()
 
         return {"message" : "Usuário criado."}, 201
+
+@blp.route("/login")
+class UserLogin(MethodView):
+    @blp.arguments(UserLoginSchema)
+    def post(self, user_data):
+        user = UserModel.query.filter(
+            UserModel.email == user_data['email']
+        ).first()
+
+        if user and pbkdf2_sha256.verify(user_data['password'], user.password):
+            access_token = create_access_token(identity=user.id)
+            return {"access_token": access_token}
+
+        abort(401, message="Invalid cedentials.")
+
+@blp.route("/logout")
+class UserLogout(MethodView):
+    @jwt_required()
+    def post(self):
+        jti = get_jwt()["jti"]
+        BLOCKLIST.add(jti)
+        return {"message":"Usuário deslogado com sucesso."}
+
+@blp.route("/users")
+class Users(MethodView):
+    @blp.response(200, UserSchema(many=True))
+    def get(self):
+        return UserModel.query.all()
+
+@blp.route("/user/<int:user_id>")
+class User(MethodView):
+    @blp.response(200, UserSchema)
+    def get(self, user_id):
+        user = UserModel.query.get_or_404(user_id)
+        return user
+
+    def delete(self, user_id):
+        user = UserModel.query.get_or_404(user_id)
+        db.session.delete(user)
+        db.session.commit()
+        return {"message":"User deleted."},200
