@@ -11,6 +11,16 @@ class DailyRecordSchema(Schema):
     limestone = fields.Float(required=True)
     user_id = fields.Integer(required=True)
 
+class UpdateRecordSchema(Schema):
+    date = fields.Date(required=False, missing=None)
+    diesel = fields.Float(required=True)
+    drill_water = fields.Float(required=True)
+    fresh_water = fields.Float(required=True)
+    bentonite = fields.Float(required=True)
+    barite = fields.Float(required=True)
+    limestone = fields.Float(required=True)
+
+
 class UserSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
