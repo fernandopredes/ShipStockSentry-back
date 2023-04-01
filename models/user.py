@@ -10,4 +10,4 @@ class UserModel(db.Model):
     ship_name = db.Column(db.String(120), unique=True, nullable=False)
 
     # Relationship with DailyRecordModel
-    daily_records = db.relationship("DailyRecordModel", back_populates="users", lazy=True)
+    daily_records = db.relationship("DailyRecordModel", back_populates="user", lazy=True)

@@ -1,16 +1,8 @@
 from marshmallow import Schema, fields
 
-class UserSchema(Schema):
-    id = fields.Integer()
-    name = fields.String(required=True)
-    email = fields.Email(required=True, unique=True)
-    password = fields.String(required=True)
-    ship_name = fields.String(required=True, unique=True)
-    daily_records = fields.Nested("DailyRecordSchema", many=True)
-
 class DailyRecordSchema(Schema):
     id = fields.Integer()
-    date = fields.Date(required=True)
+    date = fields.Date(required=False, missing=None)
     diesel = fields.Float(required=True)
     drill_water = fields.Float(required=True)
     fresh_water = fields.Float(required=True)
@@ -18,4 +10,11 @@ class DailyRecordSchema(Schema):
     barite = fields.Float(required=True)
     limestone = fields.Float(required=True)
     user_id = fields.Integer(required=True)
-    user = fields.Nested(UserSchema, exclude=("daily_records"))
+
+class UserSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)
+    email = fields.Email(required=True)
+    ship_name = fields.Str(required=True)
+    daily_records = fields.List(fields.Nested(DailyRecordSchema()), dump_only=True)
