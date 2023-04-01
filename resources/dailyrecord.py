@@ -7,7 +7,7 @@ from db import db
 from models import DailyRecordModel
 from schemas import DailyRecordSchema
 
-blp = Blueprint("daily_records", __name__, description="Operations on daily_records")
+blp = Blueprint("Daily Records", __name__, description="Operations on Daily Records")
 
 @blp.route('/daily_record')
 class DailyRecordList(MethodView):

@@ -6,8 +6,8 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 
 
 from db import db
-from models import UserModel
-from schemas import UserSchema, UserLoginSchema
+from models import UserModel, DailyRecordModel
+from schemas import UserSchema, UserLoginSchema, DailyRecordSchema
 
 blp = Blueprint("Users", __name__, description="Operations on Users")
 
@@ -72,3 +72,10 @@ class User(MethodView):
         db.session.delete(user)
         db.session.commit()
         return {"message":"User deleted."},200
+
+@blp.route("/user/<int:user_id>/daily_records")
+class UserRecordsList(MethodView):
+    @blp.response(200, DailyRecordSchema(many=True))
+    def get(self, user_id):
+        daily_records = DailyRecordModel.query.filter_by(user_id=user_id).all()
+        return daily_records
