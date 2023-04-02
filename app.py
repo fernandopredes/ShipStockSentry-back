@@ -6,6 +6,7 @@ from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from blocklist import BLOCKLIST
+from flask_cors import CORS
 
 from db import db
 import models
@@ -31,6 +32,9 @@ def create_app(db_url=None):
 
     db.init_app(app)
     api = Api(app)
+
+    # Enable CORS
+    CORS(app)
 
     app.config["JWT_SECRET_KEY"] = "121055982679089208576533403122492505118"
     jwt = JWTManager(app)
