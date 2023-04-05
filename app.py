@@ -18,7 +18,7 @@ def create_app(db_url=None):
     app = Flask(__name__)
     load_dotenv()
 
-    app.config["API_TITLE"] = "Stores REST API"
+    app.config["API_TITLE"] = "Ship Stock Sentry REST API"
     app.config["API_VERSION"] = "v1"
     app.config["OPENAPI_VERSION"] = "3.0.3"
     app.config["OPENAPI_URL_PREFIX"] = "/"
