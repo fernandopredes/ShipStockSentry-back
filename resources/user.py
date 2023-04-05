@@ -13,6 +13,7 @@ blp = Blueprint("Users", __name__, description="Operations on Users")
 
 @blp.route("/register")
 class UserRegister(MethodView):
+    @blp.doc(summary="Rota para registrar um usuário")
     @blp.arguments(UserSchema)
     def post(self, user_data):
         if UserModel.query.filter(UserModel.name == user_data["name"]).first():
@@ -34,6 +35,7 @@ class UserRegister(MethodView):
 
 @blp.route("/login")
 class UserLogin(MethodView):
+    @blp.doc(summary="Rota para realizar o login de um usuário")
     @blp.arguments(UserLoginSchema)
     def post(self, user_data):
         user = UserModel.query.filter(
@@ -48,6 +50,7 @@ class UserLogin(MethodView):
 
 @blp.route("/logout")
 class UserLogout(MethodView):
+    @blp.doc(summary="Rota para logout")
     @jwt_required()
     def post(self):
         jti = get_jwt()["jti"]
@@ -56,6 +59,7 @@ class UserLogout(MethodView):
 
 @blp.route("/users")
 class Users(MethodView):
+    @blp.doc(summary="Rota para pegar todos os usuários")
     @jwt_required()
     @blp.response(200, UserSchema(many=True))
     def get(self):
@@ -63,6 +67,7 @@ class Users(MethodView):
 
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
+    @blp.doc(summary="Rota para pegar um único usuário pelo id")
     @jwt_required()
     @blp.response(200, UserSchema)
     def get(self, user_id):
@@ -72,6 +77,7 @@ class User(MethodView):
 
 @blp.route("/user/<int:user_id>/daily_records")
 class UserRecordsList(MethodView):
+    @blp.doc(summary="Rota para pegar todos os daily_records de um único usuário")
     @jwt_required()
     @blp.response(200, DailyRecordSchema(many=True))
     def get(self, user_id):
