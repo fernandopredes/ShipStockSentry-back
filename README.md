@@ -21,7 +21,7 @@ To use Ship Stock Sentry locally, follow these steps:
 1. Create a virtual environment by running `python -m venv venv` in the terminal.
 2. Activate the virtual environment by running `source venv/bin/activate` on Unix or `venv\Scripts\activate` on Windows.
 3. Install the required dependencies by running `pip install -r requirements.txt`.
-4. Start the back-end server by running `python app.py` in the terminal. This will start the Flask server on `http://localhost:5000`.
+4. Start the back-end server by running `flask run` in the terminal. This will start the Flask server on `http://localhost:5000`.
 5. Access the API documentation by navigating to `http://localhost:5000/swagger-ui` in your web browser.
 
 
