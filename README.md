@@ -29,7 +29,11 @@ To use Ship Stock Sentry locally, follow these steps:
 
 ## Usage
 
-Once the application is running, you must register and log in to view all ROBs on board the drilling ship. From there, you can create new ROBs, edit existing ones, and delete ROBs as needed. You can also view consumables by tank levels to help manage and monitor usage.
+Before you can use the Ship Stock Sentry application, both the back-end and front-end of the application must be running. Here are the steps to use the application:
+
+1. Start the back-end server by running `flask run` in the terminal. This will start the Flask server on `http://localhost:5000`.
+2. In a separate terminal window, navigate to the front-end directory and follow the instructions in the front-end repo readme.md file to start the front-end application.
+3. Register and log in to the application to view all ROBs on board the drilling ship. From there, you can create new ROBs, edit existing ones, and delete ROBs as needed. You can also view consumables by tank levels to help manage and monitor usage.
 
 ## Contributing
 
