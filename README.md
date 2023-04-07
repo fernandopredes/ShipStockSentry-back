@@ -6,6 +6,8 @@
 
 Ship Stock Sentry is an application that allows users to monitor the consumables of a drilling ship. It provides the ability to log in, view all remain on board (ROBs), create new ROBs, edit existing ones, and delete ROBs. The back-end of the application is built using Flask.
 
+The front-end of the application can be found in the following repository: [https://github.com/fernandopredes/ShipStockSentry-front](https://github.com/fernandopredes/ShipStockSentry-front)
+
 ## Features 🚀
 
 - View all ROBs on board the drilling ship, including information on the type of consumable and available quantity.
@@ -32,4 +34,3 @@ Once the application is running, you must register and log in to view all ROBs o
 ## Contributing
 
 If you would like to contribute to Ship Stock Sentry, please open a pull request or issue on the GitHub repository.
-
