@@ -1,7 +1,6 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import pbkdf2_sha256
-from blocklist import BLOCKLIST
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 
 
@@ -48,22 +47,7 @@ class UserLogin(MethodView):
 
         abort(401, message="Invalid cedentials.")
 
-@blp.route("/logout")
-class UserLogout(MethodView):
-    @blp.doc(summary="Rota para logout")
-    @jwt_required()
-    def post(self):
-        jti = get_jwt()["jti"]
-        BLOCKLIST.add(jti)
-        return {"message":"Usuário deslogado com sucesso."}
 
-@blp.route("/users")
-class Users(MethodView):
-    @blp.doc(summary="Rota para pegar todos os usuários")
-    @jwt_required()
-    @blp.response(200, UserSchema(many=True))
-    def get(self):
-        return UserModel.query.all()
 
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
