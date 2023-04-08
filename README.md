@@ -1,40 +1,40 @@
 <p align="center">
-  <img src="./images/ship-stock-sentry.png" alt="Ship Stock Sentry logo">
+  <img src="./images/ship-stock-sentry.png" alt="Logo do Ship Stock Sentry">
 </p>
 
 # Ship Stock Sentry 🚢
 
-Ship Stock Sentry is an application that allows users to monitor the consumables of a drilling ship. It provides the ability to log in, view all remain on board (ROBs), create new ROBs, edit existing ones, and delete ROBs. The back-end of the application is built using Flask.
+O Ship Stock Sentry é uma aplicação que permite aos usuários monitorar os consumíveis de um navio de perfuração. Com ele você pode realizar um cadastro/login, visualizar todos os relatórios de consumíveis de bordo (ROBs), criar novos ROBs, editar os existentes e excluir ROBs. O back-end da aplicação foi construído usando Flask.
 
-The front-end of the application can be found in the following repository: [https://github.com/fernandopredes/ShipStockSentry-front](https://github.com/fernandopredes/ShipStockSentry-front)
+O front-end da aplicação pode ser encontrado no seguinte repositório: [https://github.com/fernandopredes/ShipStockSentry-front](https://github.com/fernandopredes/ShipStockSentry-front)
 
-## Features 🚀
+## Funcionalidades 🚀
 
-- View all ROBs on board the drilling ship, including information on the type of consumable and available quantity.
-- View consumables by tank levels, such as fuel, water, barite, bentonite and limestone, to help manage and monitor usage.
-- Create new ROBs to the list, providing details about the type of consumable and quantity available.
-- Edit existing ROBs to update available quantities or make other changes.
-- Delete ROBs that have been used or are no longer needed.
+- Visualizar todos os ROBs a bordo do navio de perfuração, incluindo informações sobre o tipo de consumível e quantidade disponível.
+- Visualizar os consumíveis por níveis de tanque e silos, como combustível, água, barita, bentonita e calcário, para ajudar a gerenciar e monitorar o uso.
+- Criar novos ROBs na lista, fornecendo detalhes sobre o tipo de consumível e quantidade disponível.
+- Editar ROBs existentes para atualizar as quantidades disponíveis oem caso de erro no preenchimento.
+- Excluir ROBs não são mais necessários.
 
-## Installation 🧰
+## Instalação 🧰
 
-To use Ship Stock Sentry locally, follow these steps:
+Para usar o Ship Stock Sentry localmente, siga estes passos:
 
-1. Create a virtual environment by running `python -m venv venv` in the terminal.
-2. Activate the virtual environment by running `source venv/bin/activate` on Unix or `venv\Scripts\activate` on Windows.
-3. Install the required dependencies by running `pip install -r requirements.txt`.
-4. Start the back-end server by running `flask run` in the terminal. This will start the Flask server on `http://localhost:5000`.
-5. Access the API documentation by navigating to `http://localhost:5000/swagger-ui` in your web browser.
+1. Clone o repositório para a sua máquina.
+2. Crie um ambiente virtual executando `python -m venv venv` no terminal.
+3. Ative o ambiente virtual executando `source venv/bin/activate`.
+4. Instale as dependências necessárias executando `pip install -r requirements.txt`.
+5. Inicie o servidor back-end executando `flask run` no terminal. Isso iniciará o servidor Flask em `http://localhost:5000`.
+6. Acesse a documentação da API navegando para `http://localhost:5000/swagger-ui` em seu navegador da web.
 
+## Uso
 
-## Usage
+Antes de poder usar o aplicativo Ship Stock Sentry localmente, tanto o back-end quanto o front-end do aplicativo devem estar em execução. Aqui estão os passos para usar o aplicativo:
 
-Before you can use the Ship Stock Sentry application, both the back-end and front-end of the application must be running. Here are the steps to use the application:
+1. Inicie o servidor back-end executando `flask run` no terminal. Isso iniciará o servidor Flask em `http://localhost:5000`.
+2. Em uma janela de terminal separada, navegue até o diretório front-end e siga as instruções no arquivo readme.md do repositório front-end para iniciar o aplicativo front-end.
+3. Registre-se e faça login no aplicativo. A partir daí, você pode criar novos ROBs, editar os existentes e excluir ROBs conforme necessário. Você também pode visualizar os consumíveis por níveis de tanque para ajudar a gerenciar e monitorar o uso.
 
-1. Start the back-end server by running `flask run` in the terminal. This will start the Flask server on `http://localhost:5000`.
-2. In a separate terminal window, navigate to the front-end directory and follow the instructions in the front-end repo readme.md file to start the front-end application.
-3. Register and log in to the application to view all ROBs on board the drilling ship. From there, you can create new ROBs, edit existing ones, and delete ROBs as needed. You can also view consumables by tank levels to help manage and monitor usage.
+## Contribuindo
 
-## Contributing
-
-If you would like to contribute to Ship Stock Sentry, please open a pull request or issue on the GitHub repository.
+Se você gostaria de contribuir com o Ship Stock Sentry, abra um pull request ou uma issue no repositório do GitHub.
