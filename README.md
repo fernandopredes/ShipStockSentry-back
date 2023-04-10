@@ -18,6 +18,8 @@ O front-end da aplicação pode ser encontrado no seguinte repositório: [https:
 
 ## Instalação 🧰
 
+Requer o [Python 3](https://www.python.org/downloads/) instalado para rodar.
+
 Para usar o Ship Stock Sentry localmente, siga estes passos:
 
 1. Clone o repositório para a sua máquina.
