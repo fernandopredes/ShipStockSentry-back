@@ -8,7 +8,7 @@ from db import db
 from models import DailyRecordModel
 from schemas import DailyRecordSchema, UpdateRecordSchema
 
-blp = Blueprint("Daily Records", __name__, description="Operations on Daily Records")
+blp = Blueprint("Daily Records", __name__, description="Operações de vizualização, adição, remoção e edição com Daily Records")
 
 @blp.route('/daily_record')
 class DailyRecordList(MethodView):
