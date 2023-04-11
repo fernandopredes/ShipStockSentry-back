@@ -14,7 +14,7 @@ blp = Blueprint("Daily Records", __name__, description="Operações de vizualiza
 class DailyRecordList(MethodView):
     @jwt_required()
     @blp.arguments(DailyRecordSchema)
-    @blp.response(201, DailyRecordSchema)
+    @blp.response(201, DailyRecordSchema, description="Sucesso. Retorna as informações do daily_record criado.")
     def post(self, daily_record_data):
         """Rota para postar um daily_record
 
@@ -33,7 +33,7 @@ class DailyRecordList(MethodView):
 
 @blp.route('/daily_record/<int:daily_record_id>')
 class DailyRecord(MethodView):
-    @blp.response(200, DailyRecordSchema)
+    @blp.response(200, DailyRecordSchema, description="Sucesso. Retorna as informações recebidas do daily_record referente ao id escolhido.")
     @jwt_required()
     def get(self, daily_record_id):
         """ Rota para pegar um daily_record pelo id
@@ -46,7 +46,7 @@ class DailyRecord(MethodView):
 
     @jwt_required()
     @blp.arguments(UpdateRecordSchema)
-    @blp.response(200, DailyRecordSchema)
+    @blp.response(200, DailyRecordSchema, description="Sucesso. Retorna as novas informações editadas do daily_record referente ao id escolhido.")
     def put(self, daily_record_data, daily_record_id):
         """ Rota para editar um daily_record de acordo com o id
 
@@ -72,7 +72,8 @@ class DailyRecord(MethodView):
         return daily_record
 
     @jwt_required()
-    @blp.response(200, DailyRecordDelSchema, description="Retorna uma mensagem de sucesso e o daily record removido")
+    @blp.response(200, DailyRecordDelSchema, description="Retorna uma mensagem de sucesso e o daily_record removido")
+    @blp.response(404, description="O id não foi encontrado.")
     def delete(self, daily_record_id):
         """ Rota para deletar um daily_record pelo id
 
