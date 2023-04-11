@@ -62,7 +62,7 @@ class UserLogin(MethodView):
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
     @jwt_required()
-    @blp.response(200, UserSchema)
+    @blp.response(200, UserSchema, description="Sucesso. Retorna as informações recebidas do usuário referente ao id escolhido.")
     def get(self, user_id):
         """ Rota para pegar um único usuário pelo id.
 
@@ -77,7 +77,7 @@ class User(MethodView):
 class UserRecordsList(MethodView):
     @blp.doc(summary="Rota para pegar todos os daily_records de um único usuário")
     @jwt_required()
-    @blp.response(200, DailyRecordSchema(many=True))
+    @blp.response(200, DailyRecordSchema(many=True), description="Sucesso. Retorna todos os daily records referentes ao usuário escolhido.")
     def get(self, user_id):
         """ Rota para pegar todos os daily_records de um único usuário.
 
