@@ -6,7 +6,7 @@ from flask_jwt_extended import jwt_required
 
 from db import db
 from models import DailyRecordModel
-from schemas import DailyRecordSchema, UpdateRecordSchema
+from schemas import DailyRecordSchema, UpdateRecordSchema, DailyRecordDelSchema
 
 blp = Blueprint("Daily Records", __name__, description="Operações de vizualização, adição, remoção e edição com Daily Records")
 
@@ -72,6 +72,7 @@ class DailyRecord(MethodView):
         return daily_record
 
     @jwt_required()
+    @blp.response(200, DailyRecordDelSchema, description="Retorna uma mensagem de sucesso e o daily record removido")
     def delete(self, daily_record_id):
         """ Rota para deletar um daily_record pelo id
 

@@ -32,3 +32,10 @@ class UserSchema(Schema):
 class UserLoginSchema(Schema):
     email = fields.Email(required=True)
     password = fields.Str(required=True, load_only=True)
+
+class DailyRecordDelSchema(Schema):
+    """
+    Define como deve ser a estrutura do dado retornado após uma requisição de remoção.
+    """
+    message = fields.String(description="Mensagem de status da operação")
+    id = fields.Int(description="Id do daily record removido")
