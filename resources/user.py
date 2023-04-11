@@ -6,15 +6,20 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 
 from db import db
 from models import UserModel, DailyRecordModel
-from schemas import UserSchema, UserLoginSchema, DailyRecordSchema
+from schemas import UserSchema, UserLoginSchema, DailyRecordSchema, UserTokenSchema, CreateUserSchema
 
-blp = Blueprint("Users", __name__, description="Operations on Users")
+blp = Blueprint("Users", __name__, description="Operações de vizualização, adição e login com Users")
 
 @blp.route("/register")
 class UserRegister(MethodView):
-    @blp.doc(summary="Rota para registrar um usuário")
     @blp.arguments(UserSchema)
+    @blp.response(201,CreateUserSchema, description="Sucesso. Retorna uma mensagem confirmando que o usuário foi criado.")
     def post(self, user_data):
+        """ Rota para registrar um usuário.
+
+        Retorna uma mensagem confirmando que o usuário foi criado.
+
+        """
         if UserModel.query.filter(UserModel.name == user_data["name"]).first():
             abort(409, message="Já existe um usuário com esse nome.")
 
@@ -34,9 +39,14 @@ class UserRegister(MethodView):
 
 @blp.route("/login")
 class UserLogin(MethodView):
-    @blp.doc(summary="Rota para realizar o login de um usuário")
     @blp.arguments(UserLoginSchema)
+    @blp.response(200, UserTokenSchema, description="Sucesso. Retornado token de acesso e o id do usuário.")
     def post(self, user_data):
+        """ Rota para realizar o login de um usuário.
+
+        Retorna o id do usuário e gera um token de acesso.
+
+        """
         user = UserModel.query.filter(
             UserModel.email == user_data['email']
         ).first()
@@ -51,10 +61,14 @@ class UserLogin(MethodView):
 
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
-    @blp.doc(summary="Rota para pegar um único usuário pelo id")
     @jwt_required()
-    @blp.response(200, UserSchema)
+    @blp.response(200, UserSchema, description="Sucesso. Retorna as informações recebidas do usuário referente ao id escolhido.")
     def get(self, user_id):
+        """ Rota para pegar um único usuário pelo id.
+
+        Retorna uma representação das informações de um usuário.
+
+        """
         user = UserModel.query.get_or_404(user_id)
         return user
 
@@ -63,7 +77,12 @@ class User(MethodView):
 class UserRecordsList(MethodView):
     @blp.doc(summary="Rota para pegar todos os daily_records de um único usuário")
     @jwt_required()
-    @blp.response(200, DailyRecordSchema(many=True))
+    @blp.response(200, DailyRecordSchema(many=True), description="Sucesso. Retorna todos os daily records referentes ao usuário escolhido.")
     def get(self, user_id):
+        """ Rota para pegar todos os daily_records de um único usuário.
+
+        Retorna a representação das informações de todos os daily_records de um usuário.
+
+        """
         daily_records = DailyRecordModel.query.filter_by(user_id=user_id).all()
         return daily_records
