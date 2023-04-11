@@ -6,13 +6,14 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 
 from db import db
 from models import UserModel, DailyRecordModel
-from schemas import UserSchema, UserLoginSchema, DailyRecordSchema
+from schemas import UserSchema, UserLoginSchema, DailyRecordSchema, UserTokenSchema, CreateUserSchema
 
 blp = Blueprint("Users", __name__, description="Operações de vizualização, adição e login com Users")
 
 @blp.route("/register")
 class UserRegister(MethodView):
     @blp.arguments(UserSchema)
+    @blp.response(201,CreateUserSchema, description="Sucesso. Retorna uma mensagem confirmando que o usuário foi criado.")
     def post(self, user_data):
         """ Rota para registrar um usuário.
 
@@ -39,10 +40,11 @@ class UserRegister(MethodView):
 @blp.route("/login")
 class UserLogin(MethodView):
     @blp.arguments(UserLoginSchema)
+    @blp.response(200, UserTokenSchema, description="Sucesso. Retornado token de acesso e o id do usuário.")
     def post(self, user_data):
         """ Rota para realizar o login de um usuário.
 
-        Retorna o id do usuário e um token de acesso.
+        Retorna o id do usuário e gera um token de acesso.
 
         """
         user = UserModel.query.filter(
