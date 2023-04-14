@@ -23,7 +23,7 @@ Requer o [Python 3](https://www.python.org/downloads/) instalado para rodar.
 Para usar o Ship Stock Sentry localmente, siga estes passos:
 
 1. Clone o repositório para a sua máquina.
-2. Crie um ambiente virtual executando `python -m venv venv` no terminal.
+2. Crie um ambiente virtual executando `python3 -m venv venv` no terminal.
 3. Ative o ambiente virtual executando `source venv/bin/activate`.
 4. Instale as dependências necessárias executando `pip install -r requirements.txt`.
 5. Inicie o servidor back-end executando `flask run` no terminal. Isso iniciará o servidor Flask em `http://localhost:5000`.
