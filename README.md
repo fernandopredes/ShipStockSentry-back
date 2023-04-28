@@ -33,7 +33,7 @@ Para usar o Ship Stock Sentry localmente, siga estes passos:
 
 Antes de poder usar o aplicativo Ship Stock Sentry localmente, tanto o back-end quanto o front-end do aplicativo devem estar em execução. Aqui estão os passos para usar o aplicativo:
 
-1. Inicie o servidor back-end executando `flask run` no terminal. Isso iniciará o servidor Flask em `http://localhost:5000`.
+1. Inicie o servidor back-end executando `flask run` no terminal. Isso iniciará o servidor Flask em um localhost. Um exemplo da aplicação inicada na porta 5000 pode ser acessado em: `http://localhost:5000`.
 2. Em uma janela de terminal separada, navegue até o diretório front-end e siga as instruções no arquivo readme.md do repositório front-end para iniciar o aplicativo front-end.
 3. Registre-se e faça login no aplicativo. A partir daí, você pode criar novos ROBs, editar os existentes e excluir ROBs conforme necessário. Você também pode visualizar os consumíveis por níveis de tanque para ajudar a gerenciar e monitorar o uso.
 
